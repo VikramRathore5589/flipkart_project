@@ -22,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String confirmpass = confirmpasswordcontroller.text;
 
 
-    storageHelper.saveData(context, email, password, confirmpass);
+     await storageHelper.saveData(context, email, password, confirmpass);
   }
 
   @override
