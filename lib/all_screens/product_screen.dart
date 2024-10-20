@@ -51,7 +51,7 @@ Future loadproduct()async{
               return Card(
                 margin: EdgeInsets.all(16),
                 child: ListTile(
-                  leading: Text(prdct.imgUrl),
+                  leading: Image.network(prdct.imgUrl??''),
                   title: Text(prdct.name),
                   subtitle: Text(prdct.desc),
                   trailing: Text(prdct.price.toString()),

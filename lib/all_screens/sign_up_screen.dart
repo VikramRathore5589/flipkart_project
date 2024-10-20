@@ -1,7 +1,6 @@
 import 'package:flipkart_project/all_screens/log_in_screen.dart';
 import 'package:flipkart_project/core(common%20files)/functions.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -61,68 +60,71 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Padding(
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 8, right: 8),
-                      child: Column(
-                        children: [
-                          buildTextField('Enter Email', Icon(Icons.email),
-                              emailcontroller),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          buildTextField('Enter password', Icon(Icons.password),
-                              passwordcontroller),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          buildTextField('Confirm password',
-                              Icon(Icons.password), confirmpasswordcontroller),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            height: 45,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                border:
-                                    Border.all(width: 1, color: Colors.white),
-                                gradient: LinearGradient(colors: [
-                                  Color(0xffB81736),
-                                  Color(0xff281537)
-                                ])),
-                            child: Center(
-                              child: TextButton(
-                                onPressed: () {
-                                  savedata();
-                                },
-                                child: Text(
-                                  'Sign UP',
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white),
+                      child: SingleChildScrollView(
+                        physics: NeverScrollableScrollPhysics(),
+                        child: Column(
+                          children: [
+                            buildTextField('Enter Email', Icon(Icons.email),
+                                emailcontroller),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            buildTextField('Enter password', Icon(Icons.password),
+                                passwordcontroller),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            buildTextField('Confirm password',
+                                Icon(Icons.password), confirmpasswordcontroller),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Container(
+                              height: 45,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  border:
+                                      Border.all(width: 1, color: Colors.white),
+                                  gradient: LinearGradient(colors: [
+                                    Color(0xffB81736),
+                                    Color(0xff281537)
+                                  ])),
+                              child: Center(
+                                child: TextButton(
+                                  onPressed: () {
+                                    savedata();
+                                  },
+                                  child: Text(
+                                    'Sign UP',
+                                    style: TextStyle(
+                                        fontSize: 25, color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 70,
-                          ),
-                          Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text('Already have a Account?')),
-                          Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(
-                                      builder: (context) {
-                                        return LogInScreen();
-                                      },
-                                    ));
-                                  },
-                                  child: Text('Log In')))
-                        ],
+                            SizedBox(
+                              height: 70,
+                            ),
+                            Align(
+                                alignment: Alignment.bottomRight,
+                                child: Text('Already have a Account?')),
+                            Align(
+                                alignment: Alignment.bottomRight,
+                                child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacement(context,
+                                          MaterialPageRoute(
+                                        builder: (context) {
+                                          return LogInScreen();
+                                        },
+                                      ));
+                                    },
+                                    child: Text('Log In')))
+                          ],
+                        ),
                       ),
                     ),
                   )

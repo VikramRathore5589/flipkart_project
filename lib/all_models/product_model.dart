@@ -2,16 +2,15 @@ class Product {
   String id;
   String name;
   String desc;
-
-  String imgUrl;
+  String? imgUrl;
   double price;
 
   Product({
     required this.id,
     required this.name,
     required this.desc,
-    required this.imgUrl,
     required this.price,
+    this.imgUrl
   });
 
   Map<String, dynamic> toMap() {

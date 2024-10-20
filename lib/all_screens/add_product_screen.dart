@@ -2,6 +2,8 @@ import 'package:flipkart_project/all_models/product_model.dart';
 import 'package:flipkart_project/all_screens/product_screen.dart';
 import 'package:flipkart_project/core(common%20files)/functions.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -52,7 +54,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ElevatedButton(
                 onPressed: () async {
                   String name = namecontroller.text;
-                  String id = name;
+                  String id = Uuid().v4();
                   String desc = desccontroller.text;
                   String imgurl = imgUrlcontroller.text;
                   if (name.isEmpty ||
@@ -77,7 +79,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     id: id,
                     name: name,
                     desc: desc,
-                    imgUrl: imgurl,
+                    imgUrl: imgurl.isEmpty?'https://dummyimage.com/600x400/000/fff':imgurl,
                     price: price,
                   );
 
