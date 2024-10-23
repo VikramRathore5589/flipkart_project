@@ -86,15 +86,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
                   await help.setString(product);
 
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  ScaffoldMessenger.of( context ).showSnackBar( const SnackBar(
                       content: Text('Product added successfully')));
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return ProductScreen();
+                      return const ProductScreen();
                     },
                   ));
                 },
-                child: Text('Add Product'),
+                child: const Text('Add Product'),
               ),
             ],
           ),

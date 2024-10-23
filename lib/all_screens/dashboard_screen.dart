@@ -15,16 +15,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   int currentIndex=0;
   List<Widget> screenList=[
-    ProductScreen(),
-    CartScreen(),
-    CategoryScreen(),
-    ProfileScreen()
+    const ProductScreen(),
+    const CartScreen(),
+    const CategoryScreen(),
+    const ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('DashBoard Screen'),),
-      bottomNavigationBar: BottomNavigationBar(items: [
+      appBar: AppBar(title: const Text('DashBoard Screen'),),
+      bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.production_quantity_limits),label: 'Product'),
         BottomNavigationBarItem(icon: Icon(Icons.category),label: 'Category'),
         BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),label: 'Cart'),

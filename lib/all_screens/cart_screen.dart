@@ -6,7 +6,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(   appBar: AppBar(centerTitle: true,
-      title: Text('Cart Screen'),),
+      title: const Text('Cart Screen'),),
     );
   }
 }

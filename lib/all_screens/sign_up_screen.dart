@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Color(0xffB81736),
@@ -41,14 +41,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   buildText(),
-                  SizedBox(
+                  const SizedBox(
                     height: 80,
                   ),
                   Container(
@@ -61,22 +61,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 8, right: 8),
                       child: SingleChildScrollView(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         child: Column(
                           children: [
-                            buildTextField('Enter Email', Icon(Icons.email),
+                            buildTextField('Enter Email', const Icon(Icons.email),
                                 emailcontroller),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
-                            buildTextField('Enter password', Icon(Icons.password),
+                            buildTextField('Enter password', const Icon(Icons.password),
                                 passwordcontroller),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             buildTextField('Confirm password',
-                                Icon(Icons.password), confirmpasswordcontroller),
-                            SizedBox(
+                                const Icon(Icons.password), confirmpasswordcontroller),
+                            const SizedBox(
                               height: 30,
                             ),
                             Container(
@@ -85,10 +85,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                      const BorderRadius.all(Radius.circular(20)),
                                   border:
                                       Border.all(width: 1, color: Colors.white),
-                                  gradient: LinearGradient(colors: [
+                                  gradient: const LinearGradient(colors: [
                                     Color(0xffB81736),
                                     Color(0xff281537)
                                   ])),
@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   onPressed: () {
                                     savedata();
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Sign UP',
                                     style: TextStyle(
                                         fontSize: 25, color: Colors.white),
@@ -105,10 +105,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 70,
                             ),
-                            Align(
+                            const Align(
                                 alignment: Alignment.bottomRight,
                                 child: Text('Already have a Account?')),
                             Align(
@@ -118,11 +118,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       Navigator.pushReplacement(context,
                                           MaterialPageRoute(
                                         builder: (context) {
-                                          return LogInScreen();
+                                          return const LogInScreen();
                                         },
                                       ));
                                     },
-                                    child: Text('Log In')))
+                                    child: const Text('Log In')))
                           ],
                         ),
                       ),
@@ -138,7 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Text buildText() {
-    return Text(
+    return const Text(
       ' Welcome\n Sign UP!',
       style: TextStyle(
         color: Colors.white,

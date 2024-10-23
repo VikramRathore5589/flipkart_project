@@ -13,7 +13,7 @@ class StorageHelper {
       String confirmPassword) async {
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('This field is required'),
         ),
       );
@@ -21,7 +21,7 @@ class StorageHelper {
     }
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Passwords do not match')),
+        const SnackBar(content: Text('Passwords do not match')),
       );
       return;
     }
@@ -31,11 +31,11 @@ class StorageHelper {
     await sharedPreferences.setString('password', password);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Sign Up Successful')),
+      const SnackBar(content: Text('Sign Up Successful')),
     );
 
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return LogInScreen();
+      return const LogInScreen();
     }));
   }Future<void> getData(context, email, password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -44,15 +44,15 @@ class StorageHelper {
 
     if (email == storedEmail && password == storedPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login Successful')),
+        const SnackBar(content: Text('Login Successful')),
       );
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return DashboardScreen();
+        return const DashboardScreen();
       }));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Wrong email or password')),
+        const SnackBar(content: Text('Wrong email or password')),
       );
     }
   }Future<void> setString(Product product)async{

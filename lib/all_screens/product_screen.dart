@@ -33,23 +33,23 @@ List<Product> productlist = [];
           onPressed: () async {
             await Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return AddProductScreen();
+                return  const AddProductScreen();
               },
             ));
             loadproduct();
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Product Screen'),
+          title: const Text('Product Screen'),
         ),
         body: ListView.builder(
             itemCount: productlist.length,
             itemBuilder: (context, index) {
               Product prdct = productlist[index];
               return Card(
-                margin: EdgeInsets.all(16),
+                margin: const EdgeInsets.all(16),
                 child: ListTile(
                   leading: Image.network(
                 prdct.imgUrl ?? 'placeholder_image_url',
