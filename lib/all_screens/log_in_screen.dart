@@ -13,8 +13,8 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
-  final helper=Helper();
-  void login()async{
+final helper=StorageHelper();
+void login()async{
     String email=emailcontroller.text;
     String password=passwordcontroller.text;
     helper.getData(context, email, password);

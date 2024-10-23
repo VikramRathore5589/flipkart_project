@@ -11,27 +11,27 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  Get get=Get();
-  List<Product> productlist = [];
+final  get=StorageHelper();
+List<Product> productlist = [];
 
   @override
   void initState() {
     loadproduct();
     super.initState();
   }
-Future loadproduct()async{
-     productlist= await get.getstring();
-     setState(() {
 
-     });
-}
+  Future loadproduct() async {
+    productlist = await get.getString();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: ()async {
-           await Navigator.push(context, MaterialPageRoute(
+          onPressed: () async {
+            await Navigator.push(context, MaterialPageRoute(
               builder: (context) {
                 return AddProductScreen();
               },
@@ -51,8 +51,14 @@ Future loadproduct()async{
               return Card(
                 margin: EdgeInsets.all(16),
                 child: ListTile(
-                  leading: Image.network(prdct.imgUrl??''),
-                  title: Text(prdct.name),
+                  leading: Image.network(
+                prdct.imgUrl ?? 'placeholder_image_url',
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit.cover,
+                ),
+
+                title: Text(prdct.name),
                   subtitle: Text(prdct.desc),
                   trailing: Text(prdct.price.toString()),
                 ),

@@ -4,7 +4,6 @@ import 'package:flipkart_project/core(common%20files)/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
 
@@ -19,12 +18,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
     TextEditingController desccontroller = TextEditingController();
     TextEditingController imgUrlcontroller = TextEditingController();
     TextEditingController pricecontroller = TextEditingController();
-    Help help = Help();
-
+    final help = StorageHelper();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Add Products'),
+          title: const Text('Add Products'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -32,37 +30,37 @@ class _AddProductScreenState extends State<AddProductScreen> {
             children: [
               TextField(
                 controller: namecontroller,
-                decoration: InputDecoration(hintText: 'Enter product Name'),
+                decoration:
+                    const InputDecoration(hintText: 'Enter product Name'),
               ),
               TextField(
                 controller: desccontroller,
                 maxLines: 3,
-                decoration:
-                    InputDecoration(hintText: 'Enter product Description'),
+                decoration: const InputDecoration(
+                    hintText: 'Enter product Description'),
               ),
               TextField(
                 controller: imgUrlcontroller,
-                decoration: InputDecoration(hintText: 'Enter product ImgUrl'),
+                decoration:
+                    const InputDecoration(hintText: 'Enter product ImgUrl'),
               ),
               TextField(
                 controller: pricecontroller,
-                decoration: InputDecoration(hintText: 'Enter product Price'),
+                decoration:
+                    const InputDecoration(hintText: 'Enter product Price'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ElevatedButton(
                 onPressed: () async {
                   String name = namecontroller.text;
-                  String id = Uuid().v4();
+                  String id = const Uuid().v4();
                   String desc = desccontroller.text;
                   String imgurl = imgUrlcontroller.text;
-                  if (name.isEmpty ||
-                      desc.isEmpty ||
-                      imgurl.isEmpty
-                  ) {
+                  if (name.isEmpty || desc.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('All fields are required')),
+                      const SnackBar(content: Text('All fields are required')),
                     );
                     return;
                   }
@@ -70,7 +68,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   double? price = double.tryParse(pricecontroller.text);
                   if (price == null || price <= 0) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please enter a valid price')),
+                      const SnackBar(
+                          content: Text('Please enter a valid price')),
                     );
                     return;
                   }
@@ -79,13 +78,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     id: id,
                     name: name,
                     desc: desc,
-                    imgUrl: imgurl.isEmpty?'https://dummyimage.com/600x400/000/fff':imgurl,
+                    imgUrl: imgurl.isEmpty
+                        ? 'https://dummyimage.com/600x400/000/fff'
+                        : imgurl,
                     price: price,
                   );
 
-                  await help.setstring(product);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Product added successfully')));
+                  await help.setString(product);
+
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Product added successfully')));
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return ProductScreen();

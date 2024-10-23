@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHelper {
+  static const _productKey='product';
   Future<void> saveData(BuildContext context, String email, String password,
       String confirmPassword) async {
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
@@ -36,11 +37,7 @@ class StorageHelper {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return LogInScreen();
     }));
-  }
-}
-
-class Helper {
-  Future<void> getData(context, email, password) async {
+  }Future<void> getData(context, email, password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? storedEmail = sharedPreferences.getString('email');
     String? storedPassword = sharedPreferences.getString('password');
@@ -58,34 +55,30 @@ class Helper {
         SnackBar(content: Text('Wrong email or password')),
       );
     }
-  }
-}
-
-class Help {
-  Future<void> setstring(Product product)async{
+  }Future<void> setString(Product product)async{
     SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
-    List<String> productList=sharedPreferences.getStringList('product')??[];
+    List<String> productList=sharedPreferences.getStringList(_productKey)??[];
     Map<String,dynamic> map=product.toMap();
     String mapstr=jsonEncode(map);
     productList.add(mapstr);
     sharedPreferences.setStringList('product', productList);
 
 
+  } Future<List<Product>> getString()async{
+    SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+    List<String> productList=sharedPreferences.getStringList(_productKey)??[];
+    List<Product> list=[];
+    for(int i=0; i<productList.length;i++){
+      String strmap=productList[i];
+      Map<String,dynamic> map=jsonDecode(strmap);
+      Product product=Product.fromMap(map);
+      list.add(product);
+
+    }return list;
+
+
   }
 }
- class Get{
-   Future<List<Product>> getstring()async{
-   SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
-   List<String> productList=sharedPreferences.getStringList('product')??[];
-   List<Product> list=[];
-   for(int i=0; i<productList.length;i++){
-     String strmap=productList[i];
-     Map<String,dynamic> map=jsonDecode(strmap);
-     Product product=Product.fromMap(map);
-     list.add(product);
-
-   }return list;
 
 
- }
-  }
+
