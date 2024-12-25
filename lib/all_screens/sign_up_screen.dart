@@ -15,14 +15,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final confirmpasswordcontroller = TextEditingController();
   StorageHelper storageHelper = StorageHelper();
 
-  void savedata() async {
-    String email = emailcontroller.text;
-    String password = passwordcontroller.text;
-    String confirmpass = confirmpasswordcontroller.text;
 
-
-     await storageHelper.saveData(context, email, password, confirmpass);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +57,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         child: Column(
                           children: [
-                            buildTextField('Enter Email', const Icon(Icons.email),
-                                emailcontroller),
+                            buildTextField('Enter Email',
+                                const Icon(Icons.email), emailcontroller),
                             const SizedBox(
                               height: 30,
                             ),
-                            buildTextField('Enter password', const Icon(Icons.password),
-                                passwordcontroller),
+                            buildTextField('Enter password',
+                                const Icon(Icons.password), passwordcontroller),
                             const SizedBox(
                               height: 30,
                             ),
-                            buildTextField('Confirm password',
-                                const Icon(Icons.password), confirmpasswordcontroller),
+                            buildTextField(
+                                'Confirm password',
+                                const Icon(Icons.password),
+                                confirmpasswordcontroller),
                             const SizedBox(
                               height: 30,
                             ),
@@ -84,8 +79,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(20)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
                                   border:
                                       Border.all(width: 1, color: Colors.white),
                                   gradient: const LinearGradient(colors: [
@@ -95,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Center(
                                 child: TextButton(
                                   onPressed: () {
-                                    savedata();
+                                    saveData();
                                   },
                                   child: const Text(
                                     'Sign UP',
@@ -160,5 +155,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
               borderSide: const BorderSide(color: Colors.purple, width: 10),
               borderRadius: BorderRadius.circular(16))),
     );
+  }void saveData() async {
+    String email = emailcontroller.text;
+    String password = passwordcontroller.text;
+    String confirmPassword = confirmpasswordcontroller.text;
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('This field is required'),
+        ),
+      );
+      return;
+    }
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Passwords do not match')),
+      );
+      return;
+    }
+
+    await storageHelper.saveData(context, email, password, confirmPassword);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Sign Up Successful')),
+    );
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      return const LogInScreen();
+    }));
   }
 }

@@ -15,7 +15,7 @@ final helper=StorageHelper();
 void login()async{
     String email=emailcontroller.text;
     String password=passwordcontroller.text;
-    helper.getData(context, email, password);
+   await helper.getData(context, email, password);
   }
 
   @override
