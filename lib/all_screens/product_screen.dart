@@ -1,7 +1,8 @@
 import 'package:flipkart_project/all_models/product_model.dart';
 import 'package:flipkart_project/all_screens/add_product_screen.dart';
-import 'package:flipkart_project/core(common%20files)/functions.dart';
+import 'package:flipkart_project/providers/product_screen_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -11,18 +12,12 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-final  get=StorageHelper();
-List<Product> productlist = [];
-
   @override
   void initState() {
-    loadproduct();
     super.initState();
-  }
-
-  Future loadproduct() async {
-    productlist = await get.getString();
-    setState(() {});
+    ProductProvider productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    productProvider.loadProduct();
   }
 
   @override
@@ -33,10 +28,12 @@ List<Product> productlist = [];
           onPressed: () async {
             await Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return  const AddProductScreen();
+                return AddProductScreen();
               },
             ));
-            loadproduct();
+            ProductProvider productProvider =
+                Provider.of<ProductProvider>(context, listen: false);
+            productProvider.loadProduct();
           },
           child: const Icon(Icons.add),
         ),
@@ -44,26 +41,27 @@ List<Product> productlist = [];
           centerTitle: true,
           title: const Text('Product Screen'),
         ),
-        body: ListView.builder(
-            itemCount: productlist.length,
-            itemBuilder: (context, index) {
-              Product prdct = productlist[index];
-              return Card(
-                margin: const EdgeInsets.all(16),
-                child: ListTile(
-                  leading: Image.network(
-                prdct.imgUrl ?? 'placeholder_image_url',
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover,
-                ),
-
-                title: Text(prdct.name),
-                  subtitle: Text(prdct.desc),
-                  trailing: Text(prdct.price.toString()),
-                ),
-              );
-            }),
+        body: Consumer<ProductProvider>(builder: (context, provider, child) {
+          return ListView.builder(
+              itemCount: provider.productList.length,
+              itemBuilder: (context, index) {
+                Product product = provider.productList[index];
+                return Card(
+                  margin: const EdgeInsets.all(16),
+                  child: ListTile(
+                    leading: Image.network(
+                      product.imgUrl ?? 'placeholder_image_url',
+                      height: 50,
+                      width: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(product.name),
+                    subtitle: Text(product.desc),
+                    trailing: Text(product.price.toString()),
+                  ),
+                );
+              });
+        }),
       ),
     );
   }
